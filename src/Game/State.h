@@ -8,6 +8,8 @@ class State
 public:
 	State(int a, int b, int c);
 	int piles[3];
-  Turn turn;
+
+private:
+	void sort();
 };
 #endif

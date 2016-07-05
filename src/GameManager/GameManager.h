@@ -1,15 +1,20 @@
 #ifndef GAMEMANAGER_H
 #define GAMEMANAGER_H
 
-#import "../Game/State.h"
+#include "../Game/State.h"
+#include <vector>
 
 class GameManager
 {
+enum GameType {WINNING, LOSING, UNSET};
+
 public:
   GameManager();
-  ~GameManager();
   void bestMove(State currState);
-  bool isWinner();
-  void getMoves();
+  bool isWinner(State currState);
+  void getMoves(State currState);
+
+private:
+  std::vector<std::vector<std::vector<GameType> > > memo;
 };
 #endif

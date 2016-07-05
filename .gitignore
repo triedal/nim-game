@@ -27,3 +27,10 @@
 *.exe
 *.out
 *.app
+
+# Other
+bin/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+._.DS_Store
