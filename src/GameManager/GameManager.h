@@ -9,12 +9,12 @@ class GameManager
 enum GameType {WINNING, LOSING, UNSET};
 
 public:
-  GameManager();
-  void bestMove(State currState);
-  bool isWinner(State currState);
-  void getMoves(State currState);
+    GameManager();
+    void bestMove(State currState);
+    bool isWinner(State currState);
+    void getMoves(State currState);
 
 private:
-  std::vector<std::vector<std::vector<GameType> > > memo;
+    std::vector<std::vector<std::vector<GameType> > > memo;
 };
 #endif

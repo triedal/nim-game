@@ -3,11 +3,11 @@
 
 class State
 {
-  enum Turn {PLAYER, COMPUTER};
+enum Turn {PLAYER, COMPUTER};
 
 public:
-	State(int a, int b, int c);
-	int piles[3];
+    State(int a, int b, int c);
+    int piles[3];
 
 private:
 	void sort();
