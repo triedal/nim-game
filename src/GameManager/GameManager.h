@@ -7,14 +7,17 @@
 class GameManager
 {
 enum GameType {WINNING, LOSING, UNSET};
+enum Turn {PLAYER, COMPUTER};
 
 public:
-    GameManager();
     std::vector<int> bestMove(State currState);
     bool isWinner(State currState);
     std::vector<std::vector<int> > getMoves(State currState);
+    void run();
 
 private:
+    void initMemoVector(int p1, int p2, int p3);
     std::vector<std::vector<std::vector<GameType> > > memo;
+    Turn turn;
 };
 #endif

@@ -1,14 +1,8 @@
 #include "GameManager.h"
 #include <iostream>
 
-GameManager::GameManager()
+void GameManager::initMemoVector(int p1, int p2, int p3)
 {
-    int p1, p2, p3;
-    std::cout << "Enter number of stones per pile:" << std::endl;
-    std::cin >> p1;
-    std::cin >> p2;
-    std::cin >> p3;
-
     // initialze 3D array to hold memoized states
     memo.resize(p1);
     for (int i = 0; i < p1; ++i) {
@@ -100,4 +94,45 @@ std::vector<int> GameManager::bestMove(State currState)
             bestMove = move2Minus3;
     }
     return bestMove;
+}
+
+void GameManager::run()
+{
+    int p1, p2, p3;
+    std::cout << "Enter number of stones per pile:" << std::endl;
+    std::cin >> p1;
+    std::cin >> p2;
+    std::cin >> p3;
+
+    initMemoVector(p1, p2, p3);
+    State state(p1, p2, p3);
+
+    if (isWinner(state))
+    {
+        std::cout << "I'll go first." << std::endl;
+        turn = COMPUTER;
+    } else
+    {
+        std::cout << "You go first." << std::endl;
+        turn = PLAYER;
+    }
+
+    while (true)
+    {
+        if (turn == COMPUTER)
+        {
+            std::cout << "Computer's turn:" << std::endl;
+        } else
+        {
+            int minuend, subtrahend;
+            std::cout << "Player's turn:" << std::endl;
+            std::cin >> minuend;
+            std::cin >> subtrahend;
+
+            if ((minuend == 1 && subtrahend == 2) || (minuend == 1 && subtrahend == 3))
+                state.update(state.getPileVal(minuend) - state.getPileVal(subtrahend), state.getPileVal(2), state.getPileVal(3));
+            else
+                state.update(state.getPileVal(1), state.getPileVal(minuend) - state.getPileVal(subtrahend), state.getPileVal(3));
+        }
+    }
 }

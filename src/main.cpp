@@ -1,8 +1,8 @@
 #include "GameManager/GameManager.h"
-#include <iostream>
 
 int main()
 {
     GameManager gm;
+    gm.run();
     return 0;
 }
