@@ -12,7 +12,7 @@ public:
     GameManager();
     void bestMove(State currState);
     bool isWinner(State currState);
-    void getMoves(State currState);
+    std::vector<std::vector<int> > getMoves(State currState);
 
 private:
     std::vector<std::vector<std::vector<GameType> > > memo;
