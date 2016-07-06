@@ -10,6 +10,6 @@ public:
     int piles[3];
 
 private:
-	void sort();
+    void sort();
 };
 #endif
