@@ -10,7 +10,7 @@ enum GameType {WINNING, LOSING, UNSET};
 
 public:
     GameManager();
-    void bestMove(State currState);
+    std::vector<int> bestMove(State currState);
     bool isWinner(State currState);
     std::vector<std::vector<int> > getMoves(State currState);
 

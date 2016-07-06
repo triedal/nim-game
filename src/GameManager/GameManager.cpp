@@ -81,3 +81,23 @@ bool GameManager::isWinner(State currState)
     }
     return memo[p1][p2][p3] == WINNING ? true : false;
 }
+
+std::vector<int> GameManager::bestMove(State currState)
+{
+    std::vector<int> bestMove;
+    if (isWinner(currState))
+    {
+        std::vector<std::vector<int> > moves = getMoves(currState);
+        std::vector<int> move1Minus2 = moves[0],
+                         move1Minus3 = moves[1],
+                         move2Minus3 = moves[2];
+
+        if (memo[move1Minus2[0]][move1Minus2[1]][move1Minus2[2]] == LOSING)
+            bestMove = move1Minus2;
+        if (memo[move1Minus3[0]][move1Minus3[1]][move1Minus3[2]] == LOSING)
+            bestMove = move1Minus3;
+        if (memo[move2Minus3[0]][move2Minus3[1]][move2Minus3[2]] == LOSING)
+            bestMove = move2Minus3;
+    }
+    return bestMove;
+}
