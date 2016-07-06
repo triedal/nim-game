@@ -78,7 +78,6 @@ bool GameManager::isWinner(State currState)
 
             memo[p1][p2][p3] = (isWinner(s1) && isWinner(s2) && isWinner(s3)) ? LOSING : WINNING;
         }
-        return memo[p1][p2][p3] == WINNING ? true : false;
     }
     return memo[p1][p2][p3] == WINNING ? true : false;
 }
