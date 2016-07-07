@@ -48,7 +48,6 @@ std::vector<std::vector<int> > GameManager::getMoves(State currState)
 
 bool GameManager::isWinner(State currState)
 {
-    // BUG IS IN HERE
     int p1 = currState.piles[0],
         p2 = currState.piles[1],
         p3 = currState.piles[2];
@@ -85,7 +84,7 @@ bool GameManager::isWinner(State currState)
 
 std::vector<int> GameManager::bestMove(State currState)
 {
-    std::vector<int> bestMove(3, -1);
+    std::vector<int> bestMove;
     if (isWinner(currState))
     {
         std::vector<std::vector<int> > moves = getMoves(currState);
@@ -93,11 +92,15 @@ std::vector<int> GameManager::bestMove(State currState)
                          move1Minus3 (moves[1]),
                          move2Minus3 (moves[2]);
 
-        if (memo[move1Minus2[0]][move1Minus2[1]][move1Minus2[2]] == LOSING)
+        State s1 (move1Minus2[0], move1Minus2[1], move1Minus2[2]),
+              s2 (move1Minus3[0], move1Minus3[1], move1Minus3[2]),
+              s3 (move2Minus3[0], move2Minus3[1], move2Minus3[2]);
+
+        if (memo[s1.getPileVal(1)][s1.getPileVal(2)][s1.getPileVal(3)] == LOSING)
             bestMove = move1Minus2;
-        if (memo[move1Minus3[0]][move1Minus3[1]][move1Minus3[2]] == LOSING)
+        if (memo[s2.getPileVal(1)][s2.getPileVal(2)][s2.getPileVal(3)] == LOSING)
             bestMove = move1Minus3;
-        if (memo[move2Minus3[0]][move2Minus3[1]][move2Minus3[2]] == LOSING)
+        if (memo[s3.getPileVal(1)][s3.getPileVal(2)][s3.getPileVal(3)] == LOSING)
             bestMove = move2Minus3;
     }
     return bestMove;
@@ -105,7 +108,7 @@ std::vector<int> GameManager::bestMove(State currState)
 
 bool GameManager::checkForWin(State currState)
 {
-    if (currState.getPileVal(1) == 0 && currState.getPileVal(2) == 0)
+    if (currState.getPileVal(2) == 0 && currState.getPileVal(3) == 0)
     {
         std::cout << (turn == COMPUTER ? "Computer wins!" : "Player wins!") << std::endl;
         return true;
@@ -152,7 +155,7 @@ void GameManager::run()
             if ((minuend == 1 && subtrahend == 2) || (minuend == 1 && subtrahend == 3))
                 state.update(state.getPileVal(minuend) - state.getPileVal(subtrahend), state.getPileVal(2), state.getPileVal(3));
             else
-                state.update(state.getPileVal(1), state.getPileVal(minuend) - state.getPileVal(subtrahend), state.getPileVal(3));
+                state.update(state.getPileVal(1), state.getPileVal(2) - state.getPileVal(3), state.getPileVal(3));
         }
         state.print();
         if (checkForWin(state)) break;
