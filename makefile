@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -Wall -g
-OBJECTS =  $(patsubst %.o, obj/%.o, Main.o State.o GameManager.o)
+OBJECTS =  $(patsubst %.o, obj/%.o, Main.o State.o GameManager.o Util.o)
 OBJDIR = obj
 
 nim : $(OBJECTS)
@@ -19,6 +19,10 @@ $(OBJDIR)/State.o : src/Game/State.cpp src/Game/State.h
 $(OBJDIR)/GameManager.o : src/GameManager/GameManager.cpp src/GameManager/GameManager.h
 	@[ -d obj ] || mkdir obj
 	@$(CC) $(CFLAGS) -c src/GameManager/GameManager.cpp -o obj/GameManager.o
+
+$(OBJDIR)/Util.o : src/Util/Util.cpp src/Util/Util.h
+	@[ -d obj ] || mkdir obj
+	@$(CC) $(CFLAGS) -c src/Util/Util.cpp -o obj/Util.o
 
 clean:
 	@rm ./bin/nim ./obj/*

@@ -1,4 +1,5 @@
 #include "GameManager.h"
+#include "../Util/Util.h"
 #include <iostream>
 
 void GameManager::initMemoVector(int p1, int p2, int p3)
@@ -16,25 +17,6 @@ void GameManager::initMemoVector(int p1, int p2, int p3)
         for (int j = 0; j <= p2; ++j)
             for (int k = 0; k <= p3; ++k)
                 memo[i][j][k] = UNSET;
-}
-
-void GameManager::pV1(std::vector<int> v)
-{
-    for (int i=0; i < 3; ++i)
-        std::cout << v[i];
-    std::cout << std::endl;
-}
-void GameManager::pV2(std::vector<std::vector<int> > v)
-{
-    for (int i = 0; i < 3; ++i)
-    {
-        for (int j = 0; j < 3; ++j)
-        {
-            std::cout << v[i][j];
-        }
-        std::cout << std::endl;
-    }
-
 }
 
 void GameManager::pMemo(int p1, int p2, int p3)
