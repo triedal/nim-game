@@ -29,28 +29,28 @@ std::vector<std::vector<int> > GameManager::getMoves(State currState)
     std::vector<std::vector<int> > moves(3, std::vector<int>(3, -1));
 
     // move (1 2)
-    moves[0][0] = currState.piles[0] - currState.piles[1];
-    moves[0][1] = currState.piles[1];
-    moves[0][2] = currState.piles[2];
+    moves[0][0] = currState.getPileVal(1) - currState.getPileVal(2);
+    moves[0][1] = currState.getPileVal(2);
+    moves[0][2] = currState.getPileVal(3);
 
     // move (1 3)
-    moves[1][0] = currState.piles[0] - currState.piles[2];
-    moves[1][1] = currState.piles[1];
-    moves[1][2] = currState.piles[2];
+    moves[1][0] = currState.getPileVal(1) - currState.getPileVal(3);
+    moves[1][1] = currState.getPileVal(2);
+    moves[1][2] = currState.getPileVal(3);
 
     // move (2 3)
-    moves[2][0] = currState.piles[0];
-    moves[2][1] = currState.piles[1] - currState.piles[2];
-    moves[2][2] = currState.piles[2];
+    moves[2][0] = currState.getPileVal(1);
+    moves[2][1] = currState.getPileVal(2) - currState.getPileVal(3);
+    moves[2][2] = currState.getPileVal(3);
 
     return moves;
 }
 
 bool GameManager::isWinner(State currState)
 {
-    int p1 = currState.piles[0],
-        p2 = currState.piles[1],
-        p3 = currState.piles[2];
+    int p1 = currState.getPileVal(1),
+        p2 = currState.getPileVal(2),
+        p3 = currState.getPileVal(3);
 
     if (memo[p1][p2][p3] == UNSET)
     {
