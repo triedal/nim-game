@@ -4,18 +4,42 @@
 void GameManager::initMemoVector(int p1, int p2, int p3)
 {
     // initialze 3D array to hold memoized states
-    memo.resize(p1);
-    for (int i = 0; i < p1; ++i) {
-        memo[i].resize(p2);
-        for (int j = 0; j < p2; ++j)
-            memo[i][j].resize(p3);
+    memo.resize(p1+1);
+    for (int i = 0; i <= p1; ++i) {
+        memo[i].resize(p2+1);
+        for (int j = 0; j <= p2; ++j)
+            memo[i][j].resize(p3+1);
     }
 
     // set all values in array to UNSET
-    for (int i = 0; i < p1; ++i)
-        for (int j = 0; j < p2; ++j)
-            for (int k = 0; k < p3; ++k)
+    for (int i = 0; i <= p1; ++i)
+        for (int j = 0; j <= p2; ++j)
+            for (int k = 0; k <= p3; ++k)
                 memo[i][j][k] = UNSET;
+}
+
+void GameManager::pV1(std::vector<int> v)
+{
+    for (int i=0; i < 3; ++i)
+        std::cout << v[i];
+    std::cout << std::endl;
+}
+void GameManager::pV2(std::vector<std::vector<int> > v)
+{
+    for (int i = 0; i < 3; ++i)
+    {
+        for (int j = 0; j < 3; ++j)
+        {
+            std::cout << v[i][j];
+        }
+        std::cout << std::endl;
+    }
+
+}
+
+void GameManager::pMemo(int p1, int p2, int p3)
+{
+    std::cout << (memo[p1][p2][p3] == WINNING ? "WIN" : memo[p1][p2][p3] == LOSING ? "LOSS" : "UNSET" ) << std::endl;
 }
 
 std::vector<std::vector<int> > GameManager::getMoves(State currState)
@@ -42,6 +66,7 @@ std::vector<std::vector<int> > GameManager::getMoves(State currState)
 
 bool GameManager::isWinner(State currState)
 {
+    // BUG IS IN HERE
     int p1 = currState.piles[0],
         p2 = currState.piles[1],
         p3 = currState.piles[2];
@@ -66,9 +91,9 @@ bool GameManager::isWinner(State currState)
                              move1Minus3 = moves[1],
                              move2Minus3 = moves[2];
 
-            State s1 = State(move1Minus2[0], move1Minus2[1], move1Minus3[2]),
-                  s2 = State(move1Minus3[0], move1Minus3[1], move2Minus3[2]),
-                  s3 = State(move2Minus3[0], move2Minus3[1], move2Minus3[2]);
+            State s1 (move1Minus2[0], move1Minus2[1], move1Minus2[2]),
+                  s2 (move1Minus3[0], move1Minus3[1], move1Minus3[2]),
+                  s3 (move2Minus3[0], move2Minus3[1], move2Minus3[2]);
 
             memo[p1][p2][p3] = (isWinner(s1) && isWinner(s2) && isWinner(s3)) ? LOSING : WINNING;
         }
@@ -78,13 +103,13 @@ bool GameManager::isWinner(State currState)
 
 std::vector<int> GameManager::bestMove(State currState)
 {
-    std::vector<int> bestMove;
+    std::vector<int> bestMove(3, -1);
     if (isWinner(currState))
     {
         std::vector<std::vector<int> > moves = getMoves(currState);
-        std::vector<int> move1Minus2 = moves[0],
-                         move1Minus3 = moves[1],
-                         move2Minus3 = moves[2];
+        std::vector<int> move1Minus2 (moves[0]),
+                         move1Minus3 (moves[1]),
+                         move2Minus3 (moves[2]);
 
         if (memo[move1Minus2[0]][move1Minus2[1]][move1Minus2[2]] == LOSING)
             bestMove = move1Minus2;
@@ -94,6 +119,16 @@ std::vector<int> GameManager::bestMove(State currState)
             bestMove = move2Minus3;
     }
     return bestMove;
+}
+
+bool GameManager::checkForWin(State currState)
+{
+    if (currState.getPileVal(1) == 0 && currState.getPileVal(2) == 0)
+    {
+        std::cout << (turn == COMPUTER ? "Computer wins!" : "Player wins!") << std::endl;
+        return true;
+    }
+    return false;
 }
 
 void GameManager::run()
@@ -116,12 +151,15 @@ void GameManager::run()
         std::cout << "You go first." << std::endl;
         turn = PLAYER;
     }
-
+    
     while (true)
     {
         if (turn == COMPUTER)
         {
             std::cout << "Computer's turn:" << std::endl;
+            std::vector<int> move = bestMove(state);
+
+            state.update(move[0], move[1], move[2]);
         } else
         {
             int minuend, subtrahend;
@@ -134,5 +172,8 @@ void GameManager::run()
             else
                 state.update(state.getPileVal(1), state.getPileVal(minuend) - state.getPileVal(subtrahend), state.getPileVal(3));
         }
+        state.print();
+        if (checkForWin(state)) break;
+        turn = (turn == PLAYER) ? COMPUTER : PLAYER;
     }
 }

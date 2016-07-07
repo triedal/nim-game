@@ -40,3 +40,11 @@ int State::getPileVal(int i)
 {
     return piles[i-1];
 }
+
+void State::print()
+{
+    std::cout << "Game state: ";
+    for (int i=0; i<3; ++i)
+        std::cout << piles[i] << (i == 2 ? " " : ", ");
+    std::cout << std::endl;
+}

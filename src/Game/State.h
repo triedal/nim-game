@@ -7,6 +7,7 @@ public:
     State(int a, int b, int c);
     void update(int a, int b, int c);
     int getPileVal(int i);
+    void print();
     // TODO: Make piles private and construct a setter
     int piles[3];
 
