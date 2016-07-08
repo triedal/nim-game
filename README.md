@@ -1,4 +1,6 @@
 # nim-game
+[![forthebadge](http://forthebadge.com/images/badges/certified-snoop-lion.svg)](http://forthebadge.com)
+
 A project for Analysis of Algorithms.
 
 ## Compiling
