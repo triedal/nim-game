@@ -6,6 +6,7 @@
 
 class GameManager
 {
+// Enums are used because its easier to read than having to deal with bools or 1's and 0's
 enum GameType {WINNING, LOSING, UNSET};
 enum Turn {PLAYER, COMPUTER};
 

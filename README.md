@@ -22,7 +22,7 @@ Running `gdb -tui ./bin/nim` will enter you into the "graphical" debugger. I hav
 visualizing the data:
 * `Util::pV1` - prints the contents of a vector
   * If you are in a breakpoint you can dump the contents of the vector with `call Util::pV1(nameOfVect)`
-* `Util::pV2` - prints the contents of a 3x3 vector
+* `Util::pV2` - prints the contents of a 2D vector
   * If you are in a breakpoint you can dump the contents of the vector with `call Util::pV2(nameOfVect)`
 * `GameManager::pMemo` - prints the value of a memoized game state
   * If you are in a breakpoint you can dump the contents of the vector with `call pMemo(amtInPile1, amtInPile2, amtInPile3)`

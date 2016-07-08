@@ -28,6 +28,7 @@ void State::update(int a, int b, int c)
     piles[0] = a;
     piles[1] = b;
     piles[2] = c;
+    // If piles are not in desc order, sort them
     if (piles[1] > piles[0] || 
         piles[2] > piles[1] || 
         piles[2] > piles[0])
