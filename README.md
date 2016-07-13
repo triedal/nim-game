@@ -14,7 +14,7 @@ This project uses two main classes, State and GameManager. You can think of Stat
 implementation of the game functions, isWinner, bestMove, main game play, etc.
 
 ## Known Issues
-- [ ] Entering the sequence *1*, *2*, *3* results in a seg fault. However, *3*, *2*, *1* functions fine.
+- [X] Entering the sequence *1*, *2*, *3* results in a seg fault. However, *3*, *2*, *1* functions fine.
 
 ## Debugging
 Hopefully you have a favored IDE with a sweet debugger. I did not so I was stuck using [GDB](http://www.yolinux.com/TUTORIALS/GDB-Commands.html).
