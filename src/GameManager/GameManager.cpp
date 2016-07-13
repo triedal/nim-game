@@ -20,12 +20,12 @@ void GameManager::initMemoVector(int p1, int p2, int p3)
 }
 
 // Used for debugging 2D moves array in isWinner, bestMove, and getMoves
-void GameManager::pMemo(int p1, int p2, int p3)
+void GameManager::pMemo(int p1, int p2, int p3) const
 {
     std::cout << (memo[p1][p2][p3] == WINNING ? "WIN" : memo[p1][p2][p3] == LOSING ? "LOSS" : "UNSET" ) << std::endl;
 }
 
-std::vector<std::vector<int> > GameManager::getMoves(State currState)
+std::vector<std::vector<int> > GameManager::getMoves(const State currState) const
 {
     // Initialize 3x3 array to hold potential moves that could be played
     // from currState
@@ -49,7 +49,7 @@ std::vector<std::vector<int> > GameManager::getMoves(State currState)
     return moves;
 }
 
-bool GameManager::isWinner(State currState)
+bool GameManager::isWinner(const State currState)
 {
     int p1 = currState.getPileVal(1),
         p2 = currState.getPileVal(2),
@@ -101,7 +101,7 @@ bool GameManager::isWinner(State currState)
     return memo[p1][p2][p3] == WINNING ? true : false;
 }
 
-std::vector<int> GameManager::bestMove(State currState)
+std::vector<int> GameManager::bestMove(const State currState)
 {
     std::vector<int> bestMove;
     if (isWinner(currState))
@@ -130,7 +130,7 @@ std::vector<int> GameManager::bestMove(State currState)
     return bestMove;
 }
 
-bool GameManager::checkForWin(State currState)
+bool GameManager::checkForWin(const State currState) const
 {
     /*
      * A win occurs if there is only one pile left

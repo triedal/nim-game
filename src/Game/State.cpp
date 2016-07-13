@@ -37,12 +37,12 @@ void State::update(int a, int b, int c)
     }
 }
 
-int State::getPileVal(int i)
+int State::getPileVal(int i) const
 {
     return piles[i-1];
 }
 
-void State::print()
+void State::print() const
 {
     std::cout << "Game state: ";
     for (int i=0; i<3; ++i)
