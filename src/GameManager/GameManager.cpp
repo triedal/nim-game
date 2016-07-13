@@ -152,10 +152,11 @@ void GameManager::run()
     std::cin >> p2;
     std::cin >> p3;
 
-    // 3D vector is used as a memoized data structure to hold all game outcomes
-    initMemoVector(p1, p2, p3);
     // This will be used to hold the "piles"
     State state(p1, p2, p3);
+
+    // 3D vector is used as a memoized data structure to hold all game outcomes
+    initMemoVector(state.getPileVal(1), state.getPileVal(2), state.getPileVal(3));
 
     // If the initial state is a winning move the computer plays, if it's losing
     // give the bad pile to the player.
