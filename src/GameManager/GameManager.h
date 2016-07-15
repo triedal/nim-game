@@ -12,14 +12,14 @@ enum Turn {PLAYER, COMPUTER};
 
 public:
     void run();
-    void pMemo(int p1, int p2, int p3);
+    void pMemo(int p1, int p2, int p3) const;
 
 private:
-    bool checkForWin(State currState);
-    bool isWinner(State currState);
+    bool checkForWin(const State currState) const;
+    bool isWinner(const State currState);
     void initMemoVector(int p1, int p2, int p3);
-    std::vector<int> bestMove(State currState);
-    std::vector<std::vector<int> > getMoves(State currState);
+    std::vector<int> bestMove(const State currState);
+    std::vector<std::vector<int> > getMoves(const State currState) const;
     std::vector<std::vector<std::vector<GameType> > > memo;
     Turn turn;
 };
