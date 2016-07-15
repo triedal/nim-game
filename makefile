@@ -2,11 +2,13 @@ CC = g++
 CFLAGS = -Wall -g
 OBJECTS =  $(patsubst %.o, obj/%.o, Main.o State.o GameManager.o Util.o)
 OBJDIR = obj
+TARGET = threepile
 
 nim : $(OBJECTS)
 	@[ -d bin ] || mkdir bin
-	@$(CC) $(CFLAGS) $(OBJECTS) -o ./bin/nim
+	@$(CC) $(CFLAGS) $(OBJECTS) -o ./bin/$(TARGET)
 	@echo "Complete!"
+	@echo "Binary located at /bin/threepile."
 
 $(OBJDIR)/Main.o : src/main.cpp
 	@[ -d obj ] || mkdir obj
@@ -25,5 +27,5 @@ $(OBJDIR)/Util.o : src/Util/Util.cpp src/Util/Util.h
 	@$(CC) $(CFLAGS) -c src/Util/Util.cpp -o obj/Util.o
 
 clean:
-	@rm ./bin/nim ./obj/*
+	@rm ./bin/$(TARGET) ./obj/*
 	@echo "Clean finished."
