@@ -18,7 +18,7 @@ implementation of the game functions, isWinner, bestMove, main game play, etc.
 
 ## Debugging
 Hopefully you have a favored IDE with a sweet debugger. I did not so I was stuck using [GDB](http://www.yolinux.com/TUTORIALS/GDB-Commands.html).
-Running `gdb -tui ./bin/nim` will enter you into the "graphical" debugger. I have created the following functions to assist in
+Running `gdb -tui ./bin/threepile` will enter you into the "graphical" debugger. I have created the following functions to assist in
 visualizing the data:
 * `Util::pV1` - prints the contents of a vector
   * If you are in a breakpoint you can dump the contents of the vector with `call Util::pV1(nameOfVect)`
