@@ -151,6 +151,14 @@ void GameManager::run()
     std::cin >> p1;
     std::cin >> p2;
     std::cin >> p3;
+    
+    // Handles case of game with no possible valid moves
+    if ((p1 == 0 && p2 == 0) || (p1 == 0 && p3 == 0) || (p2 == 0 && p3 == 0))
+    {
+        std::cout << "You go first." << std::endl;
+        std::cout << "No valid moves. Computer wins!" << std::endl;
+        return;
+    }
 
     // This will be used to hold the "piles"
     State state(p1, p2, p3);
